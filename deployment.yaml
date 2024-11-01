@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semaforo-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: semaforo
+  template:
+    metadata:
+      labels:
+        app: semaforo
+    spec:
+      containers:
+      - name: app
+        image: your-app-image
+        ports:
+        - containerPort: 8080
+        resources:              # Adicionar limites de recursos
+          limits:
+            memory: "512Mi"     # Limite de memória
+            cpu: "500m"         # Limite de CPU (500 milicores, meio core)
+          requests:
+            memory: "256Mi"     # Requisição mínima de memória
+            cpu: "250m"         # Requisição mínima de CPU

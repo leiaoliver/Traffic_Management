@@ -1,0 +1,29 @@
+import io.restassured.module.jsv.JsonSchemaValidator;
+
+@Então("o corpo da resposta deve estar em conformidade com o contrato de rota")
+public void oCorpoDaRespostaDeveEstarEmConformidadeComOContratoDeRota() {
+response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/rota-schema.json"));
+}
+
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "origem": {
+      "type": "string"
+    },
+    "destino": {
+      "type": "string"
+    },
+    "distancia_km": {
+      "type": "number"
+    },
+    "duracao_minutos": {
+      "type": "integer"
+    }
+  },
+  "required": ["id", "origem", "destino", "distancia_km", "duracao_minutos"]
+}
